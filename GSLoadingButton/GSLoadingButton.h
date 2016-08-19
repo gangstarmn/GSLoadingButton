@@ -9,17 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GSSpinerLayer.h"
 
-typedef void(^Completion)();
-
 @interface GSLoadingButton : UIButton
 @property (nonatomic,retain) GSSpinerLayer *spiner;
 
--(void)setCompletion:(Completion)completion;
-
--(void)StartAnimation;
-
--(void)ErrorRevertAnimationCompletion:(Completion)completion;
-
--(void)ExitAnimationCompletion:(Completion)completion;
--(void)DidStopAnimation ;
+-(void)startAnimation;
+-(void)stopAnimation ;
 @end

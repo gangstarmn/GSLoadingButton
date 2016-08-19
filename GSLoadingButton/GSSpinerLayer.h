@@ -1,5 +1,5 @@
 //
-//  ZLoadingView.h
+//  GSSpinerLayer.h
 //  ZAccountKit
 //
 //  Created by Gantulga on 4/13/16.
@@ -12,7 +12,7 @@
 
 -(instancetype) initWithFrame:(CGRect)frame;
 
--(void)animation;
+-(void)startAnimation;
 
 -(void)stopAnimation;
 

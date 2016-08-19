@@ -1,5 +1,5 @@
 //
-//  ZLoadingView.h
+//  GSSpinerLayer
 //  ZAccountKit
 //
 //  Created by Gantulga on 4/13/16.
@@ -33,7 +33,7 @@
     return self;
 }
 
--(void)animation{
+-(void)startAnimation{
     
     self.hidden = false;
     CABasicAnimation *rotate = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];

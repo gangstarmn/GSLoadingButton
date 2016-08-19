@@ -14,7 +14,6 @@
 @property (nonatomic,assign) CFTimeInterval shrinkDuration;
 @property (nonatomic,retain) CAMediaTimingFunction *shrinkCurve;
 @property (nonatomic,retain) CAMediaTimingFunction *expandCurve;
-@property (nonatomic,strong) Completion block;
 @property (nonatomic,retain) UIColor *color;
 
 @end
@@ -55,11 +54,6 @@
     return self;
 }
 
--(void)setCompletion:(Completion)completion
-{
-    _block = completion;
-}
-
 -(void)setup{
     self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2;
     self.clipsToBounds = true;
@@ -97,7 +91,7 @@
     }];
 }
 
--(void)StartAnimation{
+-(void)startAnimation{
     
     [self performSelector:@selector(Revert) withObject:nil afterDelay:0.f];
     [self.layer addSublayer:self.spiner];
@@ -109,13 +103,13 @@
     shrinkAnim.fillMode = kCAFillModeForwards;
     shrinkAnim.removedOnCompletion = false;
     [self.layer addAnimation:shrinkAnim forKey:shrinkAnim.keyPath];
-    [self.spiner animation];
+    [self.spiner startAnimation];
     [self setUserInteractionEnabled:false];
 }
 
--(void)ErrorRevertAnimationCompletion:(Completion)completion
+-(void)ErrorRevertAnimationCompletion
 {
-    self.block = completion;
+//    self.block = completion;
     CABasicAnimation *shrinkAnim = [CABasicAnimation animationWithKeyPath:@"bounds.size.width"];
     shrinkAnim.fromValue = @(CGRectGetHeight(self.bounds));
     shrinkAnim.toValue = @(CGRectGetWidth(self.bounds));
@@ -161,9 +155,9 @@
     [self setUserInteractionEnabled:true];
 }
 
--(void)ExitAnimationCompletion:(Completion)completion{
+-(void)ExitAnimationCompletion{
 
-    self.block = completion;
+//    self.block = completion;
     CABasicAnimation *expandAnim = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     expandAnim.fromValue = @(1.0);
     expandAnim.toValue = @(33.0);
@@ -181,10 +175,10 @@
     CABasicAnimation *cab = (CABasicAnimation *)anim;
     if ([cab.keyPath isEqualToString:@"transform.scale"]) {
         [self setUserInteractionEnabled:true];
-        if (self.block) {
-            self.block();
-        }
-        [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(DidStopAnimation) userInfo:nil repeats:NO];
+//        if (self.block) {
+//            self.block();
+//        }
+        [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
     }
 }
 
@@ -200,18 +194,10 @@
     
 }
 
--(void)DidStopAnimation{
+-(void)stopAnimation{
     [self.spiner stopAnimation];
     self.userInteractionEnabled = YES;
     [self.layer removeAllAnimations];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
