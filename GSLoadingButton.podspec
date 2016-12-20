@@ -1,6 +1,6 @@
  Pod::Spec.new do |s|
   s.name         = "GSLoadingButton"
-  s.version      = "0.3.0"
+  s.version      = "0.4.0"
   s.summary      = "GSLoadingButton is a loading button"
   s.description  = <<-DESC
                     GSLoadingButton is loading button. It's looks like cool.

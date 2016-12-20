@@ -54,6 +54,12 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self.layer addSublayer:self.spiner];
+    [self setup];
+}
+
 -(void)setup{
     self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2;
     self.clipsToBounds = true;
