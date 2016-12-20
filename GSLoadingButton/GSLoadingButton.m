@@ -9,7 +9,7 @@
 #import "GSLoadingButton.h"
 
 
-@interface GSLoadingButton ()
+@interface GSLoadingButton () <CAAnimationDelegate>
 
 @property (nonatomic,assign) CFTimeInterval shrinkDuration;
 @property (nonatomic,retain) CAMediaTimingFunction *shrinkCurve;
